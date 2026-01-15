@@ -4,7 +4,7 @@ import Messages from '@/models/Messages';
 import { getSessionUserInServerr } from '@/utils/getSessionUser';
 import { revalidatePath } from 'next/cache';
 
-async function checkReadStatus(messageId) {
+async function markMessageAsRead(messageId) {
   await connectTheDB();
   const sessionUser = await getSessionUserInServerr();
 
@@ -25,4 +25,4 @@ async function checkReadStatus(messageId) {
     await messages.save();
   return messages.read;
 }
-export default checkReadStatus;
+export default markMessageAsRead;

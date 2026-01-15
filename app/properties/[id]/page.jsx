@@ -8,6 +8,7 @@
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
 // import ShareButtons from '@/components/ShareButton';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import BookmarkButton from '@/components/BookmarkButton';
 import PropertyImages from '@/components/PropertyImages';
 import connectTheDB from '@/config/database';
@@ -27,6 +28,9 @@ const SpecificPropertyPage = async ({ params, searchParams }) => {
   // const { karam } = await searchParams;
   await connectTheDB();
   const thePropertyDoc = await Property.findById(id).lean();
+  if (!thePropertyDoc) {
+    return notFound('Property Not Found, May have been deleted or does not exist.');
+  }
   const theProperty = convertToSerializableObject(thePropertyDoc);
 
   if (!theProperty) {

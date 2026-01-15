@@ -19,7 +19,7 @@ const UserProfilePage = async () => {
   const properties = propertiesDocs.map((doc) =>
     convertToSerializableObject(doc)
   );
-  console.log('this is very serius seriuuus serious?', properties);
+  // console.log('this is very serius seriuuus serious?', properties);
   return (
     <section className='bg-blue-50'>
       <div className='container m-auto py-24'>

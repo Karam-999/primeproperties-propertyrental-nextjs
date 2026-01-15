@@ -1,10 +1,18 @@
 import PropertyCard from '@/components/PropertyCard';
 import connectTheDB from '@/config/database';
 import User from '@/models/User';
+// import redirect from 'next/navigation';
 import { getSessionUserInServerr } from '@/utils/getSessionUser';
+import { redirect } from 'next/navigation';
 const SavedPropertiesPage = async () => {
   await connectTheDB();
-  const { userId } = await getSessionUserInServerr();
+  const sessionUser = await getSessionUserInServerr();
+  if (!sessionUser || !sessionUser.userId) {
+    // throw new Error('You need to be Signed In');
+    redirect('/');
+  }
+
+  const { userId } = sessionUser;
   //   const userData = await User.findById(userId).populate('favourites');
   //   console.log(
   // '----------------------------------------------------------------------------------',

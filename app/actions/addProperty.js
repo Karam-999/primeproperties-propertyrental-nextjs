@@ -8,7 +8,7 @@ import { revalidatePath } from 'next/cache'; // this is so that after adding pro
 import cloudinary from '@/config/cloudinary';
 export default async function addProperty(initaialState, formData) {
   const amenities = formData.getAll('amenities');
-  console.log('the name of image is: ', formData.getAll('images'));
+  // console.log('the name of image is: ', formData.getAll('images'));
   // the name of image is:  [
   // File {
   //   size: 731057,
@@ -93,7 +93,7 @@ export default async function addProperty(initaialState, formData) {
   const theNewProperty = new Property(forMData);
   await theNewProperty.save();
 
-  console.log('the formData is: ', forMData);
+  // console.log('the formData is: ', forMData);
 
   // revalidate the cache
   revalidatePath('/properties', '/', '/layout');

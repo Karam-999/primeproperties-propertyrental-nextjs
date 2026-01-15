@@ -7,11 +7,11 @@ import { redirect } from 'next/navigation'; // to redirect to another page after
 import { revalidatePath } from 'next/cache'; // this is so that after adding messages we can see it in the listing page without refreshing
 // import cloudinary from '@/config/cloudinary';
 export default async function addMessages(previousState, formData) {
-  console.log('addMessages action called!');
+  // console.log('addMessages action called!');
   await connectTheDB();
 
   const sessionUser = await getSessionUserInServerr();
-  console.log('sessionUser:', sessionUser);
+  // console.log('sessionUser:', sessionUser);
   if (!sessionUser || !sessionUser.userId) {
     throw new Error('User needs to be Signed In');
   }

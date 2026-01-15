@@ -21,49 +21,53 @@ const PropertyCard = ({ property1 }) => {
   };
   return (
     <div className='rounded-xl shadow-md relative'>
-      <Image
-        src={`${property1.images[0]}`}
-        alt=''
-        width='0'
-        height='0'
-        sizes='100vw'
-        className='w-full h-auto rounded-t-xl'
-      />
+      <Link href={`/properties/${property1._id}`}>
+        <Image
+          src={`${property1.images[0]}`}
+          alt=''
+          width='0'
+          height='0'
+          sizes='100vw'
+          className='w-full h-auto rounded-t-xl'
+        />
+      </Link>
       <div className='p-4'>
-        <div className='text-left md:text-center lg:text-left mb-6'>
-          <div className='text-gray-600'>{property1.propType}</div>
-          <h3 className='text-xl font-bold'>{property1.propName}</h3>
+        <div className='text-left sm:text-sm md:text-center lg:text-left mb-6'>
+          <div className='text-gray-600 lg:text-lg'>{property1.propType}</div>
+          <h3 className='text-xl font-bold lg:text-2xl'>{property1.propName}</h3>
         </div>
         <h3 className='absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-blue-500 font-bold text-right md:text-center lg:text-right'>
           {getRateDisplay()}
         </h3>
 
-        <div className='flex justify-center gap-4 text-gray-500 mb-4'>
-          <p>
-            <FaBed className='inline mr-1 mb-1' />
+        <div className='flex justify-center gap-3 lg:gap-6 text-gray-500 mb-4'>
+          <p className='text-xs sm:text-xs md:text-base'>
+            <FaBed className='inline mr-1 mb-1 sm:text-xs md:text-lg' />
             {property1.beds}{' '}
-            <span className=' lg:inline'>
+            <span className='inline sm:text-xs lg:text-base'>
               {property1.beds > 1 ? 'Beds' : 'Bed'}
             </span>
           </p>
-          <p>
-            <FaBath className='inline mr-1 mb-1' /> {property1.baths}{' '}
-            <span className=' lg:inline'>
+          <p className='text-xs sm:text-xs md:text-base'>
+            <FaBath className='inline mr-1 mb-1 sm:text-xs md:text-lg' />{' '}
+            {property1.baths}{' '}
+            <span className='lg:inline sm:text-xs lg:text-base'>
               {property1.baths > 1 ? 'Baths' : 'Bath'}
             </span>
           </p>
-          <p>
-            <FaRuler className='inline mr-1 mb-1' />
-            {property1.square_feet} <span className='lg:inline'>sqft</span>
+          <p className='text-xs sm:text-xs md:text-base'>
+            <FaRuler className='inline mr-1 mb-1 sm:text-xs md:text-lg' />
+            {property1.square_feet}{' '}
+            <span className='lg:inline sm:text-xs lg:text-base'>sqft</span>
           </p>
         </div>
 
-        <div className='flex justify-center gap-4 text-green-900 text-sm mb-4'>
+        <div className='flex justify-center gap-4 lg:gap-6 text-green-900 text-sm mb-4'>
           <p>
-            <FaMoneyBillAlt className='inline mr-1 mb-1' /> Weekly
+            <FaMoneyBillAlt className='inline mr-1 mb-1 sm:text-xs md:text-lg' /> Weekly
           </p>
           <p>
-            <FaMoneyBillAlt className='inline mr-1 mb-1' /> Monthly
+            <FaMoneyBillAlt className='inline mr-1 mb-1 sm:text-xs md:text-lg' /> Monthly
           </p>
         </div>
 

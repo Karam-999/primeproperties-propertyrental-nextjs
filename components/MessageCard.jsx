@@ -1,21 +1,29 @@
 'use client';
 import Link from 'next/link';
 import { toast } from 'sonner';
+import { useGlobalContext } from '@/context/GlobalContext';
 import { deletetheMessage } from '@/app/actions/deleteMessage';
-import checkReadStatus from '@/app/actions/markMessageAsRead';
 import { useState } from 'react';
+import markMessageAsRead from '@/app/actions/markMessageAsRead';
 const MessageCard = ({ message }) => {
-  const [readState, setReadState] = useState(message.read || false);
+  const [readState, setReadState] = useState(message.read);
+  const { setUnreadMessagesCount } = useGlobalContext();
   const handleReadStatus = async () => {
-    const readStatus = await checkReadStatus(message._id);
-    setReadState(readStatus);
-    toast.success(`Marked as ${readStatus ? 'Read' : 'Unread'}!`);
+    const markAsReadOrUnread = await markMessageAsRead(message._id);
+    setReadState(markAsReadOrUnread);
+    setUnreadMessagesCount((prevCount) =>
+      markAsReadOrUnread ? prevCount - 1 : prevCount + 1
+    );
+    toast.success(`Marked as ${markAsReadOrUnread ? 'Read' : 'Unread'}!`);
   };
   const handleDeleteMessage = async () => {
     if (!confirm('Are you sure you want to delete this message?')) {
       return;
     }
     await deletetheMessage(message._id);
+    setUnreadMessagesCount((prevCount) =>
+      readState ? prevCount : prevCount - 1
+    );
     toast.success('Message Deleted Successfully!');
   };
 

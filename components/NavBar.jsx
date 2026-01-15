@@ -7,7 +7,7 @@ import ProfileDefault from '@/assets/images/profile.png';
 import { useState, useEffect } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
-import { useGlobalContext } from '@/context/GlobalContext';
+// import { useGlobalContext } from '@/context/GlobalContext';
 import UnreadMessageCount from './UnreadMessageCount';
 import { useSession, signIn, signOut, getProviders } from 'next-auth/react';
 
@@ -20,7 +20,7 @@ const Navbar = () => {
   // console.log('thus is the sessuon', sessionnn);
   // const profileImage = sessionn.data.session.user.image;
   const { data: sessionn } = sessionnn;
-  const profileImage = sessionn?.session?.user.image;
+  const profileImage = sessionn?.user.image;
 
   const pathname = usePathname();
   // console.log(pathname);

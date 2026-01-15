@@ -11,13 +11,15 @@ import NextAuth from 'next-auth';
 //     // ...add more providers here
 //   ],
 // };
-import { authOptions } from '@/utils/authOptions';
-const { handlers } = NextAuth(authOptions);
+// import { authOptions } from '@/utils/auth';
+// const { handler } = NextAuth(authOptions);
 // export { handler as GET, handler as POST };
 // export default NextAuth(authOptions);
 
 // import { handlers } from '@/utils/authOptions';
 
+// export const { GET, POST } = handlers;
+
+import { handlers } from '@/auth';
+
 export const { GET, POST } = handlers;
-
-

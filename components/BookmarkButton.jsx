@@ -10,7 +10,7 @@ const BookmarkButton = ({ property }) => {
   const { data, status } = useSession();
   // data structure is: data.session.user.id OR data.user.id depending on NextAuth version
   const userId = data?.user?.id || data?.session?.user?.id;
-  console.log('session data:', { status, userId, data });
+  // console.log('session data:', { status, userId, data });
 
   const handleBookmark = async () => {
     if (status !== 'authenticated' || !userId) {
@@ -42,15 +42,15 @@ const BookmarkButton = ({ property }) => {
     });
   }, [property._id, userId, checkBookmarkStatus]);
 
-    if (loading) {
-        return (
-            <button
-                onClick={handleBookmark}
-                className='bg-gray-500 hover:bg-gray-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center'>
-                <FaBookmark className='mr-2' /> Loading...
-            </button>
-        );
-    }
+  if (loading) {
+    return (
+      <button
+        onClick={handleBookmark}
+        className='bg-gray-500 hover:bg-gray-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center'>
+        <FaBookmark className='mr-2' /> Loading...
+      </button>
+    );
+  }
   return isBookmarked ? (
     <button
       onClick={handleBookmark}

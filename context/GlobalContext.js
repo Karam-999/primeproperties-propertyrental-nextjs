@@ -9,21 +9,21 @@ const GlobalContext = createContext();
 export function GlobalContexttProvider({ children }) {
   const [unReadMessagesCount, setUnreadMessagesCount] = useState(0);
   const { data: session } = useSession();
+  // console.log('this the session of user Login:', session);
   useEffect(() => {
-    console.log('GlobalContexttProvider useEffect');
+    // console.log('GlobalContexttProvider useEffect');
     if (session && session.user) {
-      console.log('user is logged in');
+      // console.log('user is logged in');
       getUnreadMessageCount()
         .then((res) => {
-          console.log('getUnreadMessageCount res:', res);
+          // console.log('getUnreadMessageCount res:', res);
           if (res.count) setUnreadMessagesCount(res.count);
         })
         .catch((err) => {
-          console.log('getUnreadMessageCount error:', err);
+          // console.log('getUnreadMessageCount error:', err);
         });
     }
   }, [getUnreadMessageCount, session]);
-  console.log('GlobalContexttProvider returning');
   return (
     <GlobalContext.Provider
       value={{

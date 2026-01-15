@@ -7,8 +7,8 @@ import Property from '@/models/Property';
 const PropertyPage = async () => {
   await connectTheDB(0);
   const theProperties = await Property.find({}).lean();
-  console.log(theProperties);
-  console.log('object');
+  // console.log(theProperties);
+  // console.log('object');
   return (
     <>
       <section className='px-4 py-6'>
@@ -16,7 +16,7 @@ const PropertyPage = async () => {
           {theProperties.leangth === '0' ? (
             <p>No properties Found</p>
           ) : (
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
               {theProperties.map((property) => (
                 <PropertyCard property1={property} key={property._id} />
               ))}

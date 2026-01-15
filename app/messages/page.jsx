@@ -9,7 +9,7 @@ const MessagesPage = async () => {
   await connectTheDB();
   const sessionUser = await getSessionUserInServerr();
   if (!sessionUser || !sessionUser.userId) {
-    throw new Error('You needs to be Signed In');
+    throw new Error('You need to be Signed In');
   }
   const { userId } = sessionUser;
   const readMessages = await Messages.find({ recipientId: userId, read: true })

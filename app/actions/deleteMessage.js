@@ -15,10 +15,10 @@ export const deletetheMessage = async (messageId) => {
   const { userId } = sessionUserr;
   await connectTheDB();
   // const propertyToDelete = await Property.findOne({ ownerId: userId }).lean();//this will find the property
-  const PropertyTobeDeleted = await Messages.findById(messageId);
+  const messageTobeDeleted = await Messages.findById(messageId);
 
   //verify owner
-  if (PropertyTobeDeleted.recipientId.toString() !== userId) {
+  if (messageTobeDeleted.recipientId.toString() !== userId) {
     throw new Error('You are not authorized to delete this Message');
   }
 
@@ -31,6 +31,6 @@ export const deletetheMessage = async (messageId) => {
   //   for (const publicId of imagesPublicIds) {
   //     await cloudinary.uploader.destroy('LivingLink/' + publicId);
   //   }
-  await PropertyTobeDeleted.deleteOne();
+  await messageTobeDeleted.deleteOne();
   revalidatePath('/messages', 'layout');
 };

@@ -1,4 +1,5 @@
 'use server';
+import Messages from '@/models/Messages';
 import connectTheDB from '@/config/database';
 import Property from '@/models/Property';
 import { getSessionUserInServerr } from '@/utils/getSessionUser';
@@ -20,10 +21,11 @@ export const deletetheProperty = async (propertyId) => {
   if (propertyTobeDeleted.ownerId.toString() !== userId) {
     throw new Error('You are not authorized to delete this property');
   }
+  await Messages.deleteMany({ propertyId });
 
   //extract the publlic ids from the cloudinary imageUrls
   const imagesPublicIds = propertyTobeDeleted.images.map((imageUrl) => {
-    //example image url: https://res.cloudinary.com/karam-is-a-dev/image/upload/v1767790/LivingLink/vhdp112fpo2zmu3g8hcs.jpg
+    //example image url: https://res.cloudinary.com/karam-is-a-dev/image/upload/v1767790/LivingLink/vhdp112fpo2z8hcs.jpg
     return imageUrl.split('/').at(-1).split('.').at(0); //vhdp112fpo2zmu3g8hcs
   });
   //delete the images from cloudinary
