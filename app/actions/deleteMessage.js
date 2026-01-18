@@ -24,12 +24,12 @@ export const deletetheMessage = async (messageId) => {
 
   //   //extract the publlic ids from the cloudinary imageUrls
   //   const imagesPublicIds = propertyTobeDeleted.images.map((imageUrl) => {
-  //     //example image url: https://res.cloudinary.com/karam-is-a-dev/image/upload/v1767790/LivingLink/vhdp112fpo2zmu3g8hcs.jpg
+  //     //example image url: https://res.cloudinary.com/karam-is-a-dev/image/upload/v1767790/PrimeProperties/vhdp112fpo2zmu3g8hcs.jpg
   //     return imageUrl.split('/').at(-1).split('.').at(0); //vhdp112fpo2zmu3g8hcs
   //   });
   //   //delete the images from cloudinary
   //   for (const publicId of imagesPublicIds) {
-  //     await cloudinary.uploader.destroy('LivingLink/' + publicId);
+  //     await cloudinary.uploader.destroy('PrimeProperties/' + publicId);
   //   }
   await messageTobeDeleted.deleteOne();
   revalidatePath('/messages', 'layout');

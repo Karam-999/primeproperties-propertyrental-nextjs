@@ -25,7 +25,7 @@ export const deletetheProperty = async (propertyId) => {
 
   //extract the publlic ids from the cloudinary imageUrls
   const imagesPublicIds = propertyTobeDeleted.images.map((imageUrl) => {
-    //example image url: https://res.cloudinary.com/karam-is-a-dev/image/upload/v1767790/LivingLink/vhdp112fpo2z8hcs.jpg
+    //example image url: https://res.cloudinary.com/karam-is-a-dev/image/upload/v1767790/PrimeProperties/vhdp112fpo2z8hcs.jpg
     return imageUrl.split('/').at(-1).split('.').at(0); //vhdp112fpo2zmu3g8hcs
   });
   //delete the images from cloudinary

@@ -2,11 +2,18 @@
 import PropertyCard from '@/components/PropertyCard';
 // import theProperties from '@/properties.json';
 // import Link from 'next/link';
+import Pagination from '@/components/Pagination';
 import connectTheDB from '@/config/database';
 import Property from '@/models/Property';
-const PropertyPage = async () => {
+const PropertyPage = async ({ searchParams }) => {
   await connectTheDB(0);
-  const theProperties = await Property.find({}).lean();
+  const { page = 1, pageSize = 3 } = await searchParams;
+  const firstPropertyNoOfNextPage = (page - 1) * pageSize;
+  const totalProperties = await Property.countDocuments({});
+  console.log('searchParams in property page:', page);
+  const theProperties = await Property.find({})
+    .skip(firstPropertyNoOfNextPage)
+    .limit(pageSize);
   // console.log(theProperties);
   // console.log('object');
   return (
@@ -23,6 +30,13 @@ const PropertyPage = async () => {
             </div>
           )}
         </div>
+        {pageSize < totalProperties && (
+          <Pagination
+            pageNo={parseInt(page)}
+            pageSize={parseInt(pageSize)}
+            total={parseInt(totalProperties)}
+          />
+        )}
       </section>
     </>
   );

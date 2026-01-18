@@ -74,10 +74,14 @@ const Navbar = () => {
             <div className='flex flex-1 items-center justify-center md:items-stretch md:justify-start'>
               {/* <!-- Logo --> */}
               <Link className='flex flex-shrink-0 items-center' href='/'>
-                <Image className='h-10 w-auto' src={logo} alt='LivingLink' />
+                <Image
+                  className='h-10 w-auto'
+                  src={logo}
+                  alt='PrimeProperties'
+                />
 
-                <span className='hidden md:block text-white text-2xl font-bold ml-2'>
-                  LivingLink
+                <span className='hidden block text-white text-2xl font-bold ml-2'>
+                  PrimeProperties
                 </span>
               </Link>
               {/* <!-- Desktop Menu Hidden below md screens --> */}

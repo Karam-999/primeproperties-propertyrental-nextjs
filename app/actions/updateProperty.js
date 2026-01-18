@@ -26,9 +26,9 @@ const updatetheProperty = async (formData) => {
   if (existingProperty.ownerId.toString() !== userId) {
     throw new Error('You are not authorized to update this property');
   }
-//   const images = formData
-//     .getAll('images')
-//     .filter((emptyname) => emptyname.name != '');
+  //   const images = formData
+  //     .getAll('images')
+  //     .filter((emptyname) => emptyname.name != '');
   const amenities = formData.getAll('amenities');
   const forMData = {
     ownerId: userId,
@@ -59,26 +59,26 @@ const updatetheProperty = async (formData) => {
       phone: formData.get('seller_info.phone'),
     },
   };
-//   const imageUrls = [];
+  //   const imageUrls = [];
 
-//   for (const imageFile of images) {
-//     const imageBuffer = await imageFile.arrayBuffer();
-//     const imageArray = Array.from(new Uint8Array(imageBuffer));
-//     const imageData = Buffer.from(imageArray);
+  //   for (const imageFile of images) {
+  //     const imageBuffer = await imageFile.arrayBuffer();
+  //     const imageArray = Array.from(new Uint8Array(imageBuffer));
+  //     const imageData = Buffer.from(imageArray);
 
-//     //convert to base64
-//     const imageBase64 = imageData.toString('base64');
+  //     //convert to base64
+  //     const imageBase64 = imageData.toString('base64');
 
-//     //make request to cloudinary
-//     const result = await cloudinary.uploader.upload(
-//       `data:image/png;base64,${imageBase64}`,
-//       {
-//         folder: 'LivingLink',
-//       }
-//     );
-//     imageUrls.push(result.secure_url);
-//   }
-//   forMData.images = imageUrls;
+  //     //make request to cloudinary
+  //     const result = await cloudinary.uploader.upload(
+  //       `data:image/png;base64,${imageBase64}`,
+  //       {
+  //         folder: 'LivingLink',
+  //       }
+  //     );
+  //     imageUrls.push(result.secure_url);
+  //   }
+  //   forMData.images = imageUrls;
   const updatedProperty = await Property.findByIdAndUpdate(
     propertyId,
     forMData,

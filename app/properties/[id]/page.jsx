@@ -83,7 +83,7 @@ const SpecificPropertyPage = async ({ params, searchParams }) => {
             </aside>
           </div>
         </div>
-        <PropertyImages images={theProperty.images} />
+        <PropertyImages images={theProperty.images} property={theProperty} />
       </section>
     </>
   );

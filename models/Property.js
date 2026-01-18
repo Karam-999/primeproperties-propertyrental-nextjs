@@ -33,6 +33,12 @@ const PropertySchhema = new Schema(
       city: String,
       state: String,
       zipcode: String,
+      lat: {
+        type: Number,
+      },
+      lng: {
+        type: Number,
+      }
     },
     beds: {
       type: Number,

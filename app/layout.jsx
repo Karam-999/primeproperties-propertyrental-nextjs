@@ -1,4 +1,5 @@
 import '@/assets/styles/globals.css';
+import 'photoswipe/dist/photoswipe.css';
 import Navbar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { Toaster } from '@/components/ui/sonner';
