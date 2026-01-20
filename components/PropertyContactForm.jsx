@@ -11,7 +11,7 @@ const PropertyContactForm = ({ property }) => {
   const { data: session } = useSession();
   const [messageState, messageAction, isPending] = useActionState(
     addMessages,
-    {}
+    {},
   );
   useEffect(() => {
     if (messageState.error) {
@@ -26,6 +26,14 @@ const PropertyContactForm = ({ property }) => {
         {' '}
         Your message has been sent successfully !!
       </p>
+    );
+  }
+  if (!session) {
+    return (
+      <div className='bg-white p-6 rounded-lg shadow-md'>
+        <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
+        <p className='text-gray-600'>Please sign in to send a message.</p>
+      </div>
     );
   }
   return (

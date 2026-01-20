@@ -1,7 +1,8 @@
 import { auth } from '@/auth';
-import connectTheDB from '@/config/database';
-import User from '@/models/User';
+// import connectTheDB from '@/config/database';
+// import User from '@/models/User';
 export const getSessionUserInServerr = async () => {
+  try {
   const sessiionn = await auth();
   // // // console.log('mmmmmmmmmmmmmmmmmmmmmmmm', sessiionn);
   if (!sessiionn || !sessiionn.user) {
@@ -18,7 +19,11 @@ export const getSessionUserInServerr = async () => {
   //   'user id need to be fetched from database because of auth vs next auth contradiction',
   //   result
   // );///RESOLVED
-  return result;
+    return result;
+  } catch (error) {
+    console.error('Error in getSessionUserInServerr:', error);
+    return null;
+  }
 };
 // export default async function Page() {
 //   const session = await getServerSession(authOptions);

@@ -10,7 +10,7 @@ const PropertyImages = ({ property, images }) => {
         <Gallery withCaption>
           {images.length === 1 ? (
             <Item
-              caption='Foo'
+              caption={`${property.propName}, Author: ${property.ownerName}`}
               original={images[0]}
               thumbnail={images[0]}
               width='1000'
@@ -34,7 +34,7 @@ const PropertyImages = ({ property, images }) => {
                   key={index}
                   caption={`${property.propName} (Image: ${
                     index + 1
-                  })\n Author: ${property.ownerName}`}
+                  }), Author: ${property.ownerName}`}
                   original={image}
                   thumbnail={image}
                   width='1000'
