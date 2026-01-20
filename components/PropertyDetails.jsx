@@ -77,7 +77,7 @@ const PropertyDetails = ({ property }) => {
           <p>
             <FaRuler className='inline mr-1 mb-1' />
             {property.square_feet}{' '}
-            <span className='hidden sm:inline'>sqft</span>
+            <span className='inline'>sqft</span>
           </p>
         </div>
         <p className='text-gray-500 mb-4'>{property.propDescription}</p>

@@ -35,5 +35,6 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ['/properties/add', '/messages', '/profile', '/saved']
+  matcher: ['/properties/add', '/messages', '/profile', '/saved'],
+  runtime: 'nodejs',
 };
