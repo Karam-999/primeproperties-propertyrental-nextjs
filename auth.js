@@ -84,6 +84,19 @@ export const authOptions = {
       return true;
     },
 
+    async jwt({ token, user }) {
+      if (user) {
+        // This block runs only on the initial sign-in
+        await connectTheDB();
+        const userFromDB = await User.findOne({ email: user.email });
+
+        if (userFromDB) {
+          token.id = userFromDB._id.toString(); // Store DB ID in the token
+        }
+      }
+      return token;
+    },
+
     //sessionn callbac function that modifies the sessionn
     async session(sessionnn) {
       //this sessionnn is coming from next auth
@@ -164,4 +177,4 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-export const { auth, handlers } = NextAuth(authOptions);
+export const { auth, signIn, signOut, handlers } = NextAuth(authOptions);
