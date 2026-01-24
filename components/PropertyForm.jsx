@@ -8,7 +8,6 @@ const PropertyForm = () => {
   const [actionState, action, pending] = useActionState(addProperty, {});
   const router = useRouter();
 
-
   useEffect(() => {
     if (!actionState.submitted) return;
     if (actionState.submitted) {
@@ -17,9 +16,7 @@ const PropertyForm = () => {
     } else {
       toast.error('Failed to add property');
     }
-},[actionState])
-
-
+  }, [actionState]);
 
   //   const handleSubmit = async (formData) => {
   //     const toastId = toast.loading('Adding property...');
@@ -94,6 +91,7 @@ const PropertyForm = () => {
           name='location.street'
           className='border rounded w-full py-2 px-3 mb-2'
           placeholder='Street'
+          required
         />
         <input
           type='text'
@@ -117,6 +115,7 @@ const PropertyForm = () => {
           name='location.zipcode'
           className='border rounded w-full py-2 px-3 mb-2'
           placeholder='Zipcode'
+          required
         />
       </div>
 
@@ -374,12 +373,14 @@ const PropertyForm = () => {
           name='seller_info.name'
           className='border rounded w-full py-2 px-3'
           placeholder='Name'
+          required
         />
       </div>
       <div className='mb-4'>
         <label
           htmlFor='seller_email'
-          className='block text-gray-700 font-bold mb-2'>
+          className='block text-gray-700 font-bold mb-2'
+          required>
           Seller Email
         </label>
         <input
@@ -414,7 +415,7 @@ const PropertyForm = () => {
           type='file'
           id='images'
           name='images'
-          className='border rounded w-full py-2 px-3'
+          className='border rounded w-full py-2 px-3 text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600'
           accept='image/*'
           multiple
           required
