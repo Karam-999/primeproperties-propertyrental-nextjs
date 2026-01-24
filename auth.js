@@ -24,6 +24,9 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  session: {
+    strategy: 'jwt', // Add this - use JWT instead of database sessions
+  },
   callbacks: {
     // invoked on successfull signin
     async signIn(paramssss) {
@@ -65,25 +68,28 @@ export const authOptions = {
       // }
 
       const { user } = paramssss;
-
-      //1. connect to database
-      await connectTheDB();
-      // //2. check if user exist
-      const UserExists = await User.findOne({ email: user.email });
-      // //3. if not create user
-      if (!UserExists) {
-        const username = user.name.slice(0, 20);
-        // const email = user.email;
-        await User.create({
-          username,
-          email: user.email,
-          image: user.image,
-        });
+      try {
+        //1. connect to database
+        await connectTheDB();
+        // //2. check if user exist
+        const UserExists = await User.findOne({ email: user.email });
+        // //3. if not create user
+        if (!UserExists) {
+          const username = user.name.slice(0, 20);
+          // const email = user.email;
+          await User.create({
+            username,
+            email: user.email,
+            image: user.image,
+          });
+        }
+        //4. return true to allow sign in
+        return true;
+      } catch (error) {
+        console.log('Error in signIn callback:', error);
+        return false;
       }
-      //4. return true to allow sign in
-      return true;
     },
-
     async jwt({ token, user }) {
       if (user) {
         // This block runs only on the initial sign-in
@@ -98,84 +104,92 @@ export const authOptions = {
     },
 
     //sessionn callbac function that modifies the sessionn
-    async session(sessionnn) {
-      //this sessionnn is coming from next auth
-      // console.log('this is the session log', sessionnn);
 
-      // this is the session log {
-      //   session: {
-      //     user: {
-      //       name: 'Karam',
-      //       email: 'karam//20//@gmail.com',
-      //       image: 'https://lh3.googleusercontent.com/a/ACg8/////mJlQ9nlyaBsmLT-QZFI///96-c'
-      //     },
-      //     expires: '2026-02-04T15:08:26.468Z'
-      //   },
-      //   token: {
-      //     name: 'Karam',
-      //     email: 'karam//20//@gmail.com',
-      //     picture: 'https://lh3.googleusercontent.com/a/A/////mLT-QZFI9V3ebXb_xQ=s96-c',
-      //     sub: '692e8d19-e5a9-4317-97b3-4bd5ef48b0ab',
-      //     iat: 1767625705,
-      //     exp: 1770217705,
-      //     jti: 'e8e097a0-9713-4cff-be0b-1913fe1187e3'
-      //       email: 'karam//20//@gmail.com',
-      //       image: 'https://lh3.googleusercontent.com/a/ACg8ocKjO////ZFI9V3ebXb_xQ=s96-c'
-      //     },
-      //     expires: '2026-02-04T15:08:26.573Z'
-      //   },
-      //   token: {
-      //     name: 'Karam',
-      //       email: 'karam//20//@gmail.com',
-      //       image: 'https://lh3.googleusercontent.com/a/ACg8o//lyaBsmLT-QZFI9V3ebXb_xQ=s96-c'
-      //     },
-      //     expires: '2026-02-04T15:08:26.573Z'
-      //   },
-      //       email: 'karam//20//@gmail.com',
-      //       image: 'https://lh3.googleuserco//-QZFI9V3ebXb_xQ=s96-c'
-      //       email: 'karam.sayed2024@gmail.com',
-      //       email: 'karam.sayed2024@gmail.com',
-      //   token: {
-      //     name: 'Karam',
-      //     email: 'karam//20//@gmail.com',
-      //     picture: 'https://lh3.googleusercontentsfdgTmJlQ9nlyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
-      //     name: 'Karam',
-      //     email: 'karam//20//@gmail.com',
-      //     picture: 'https://lh3.googleusercosfdgTmJlQ9nlyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
-      //     sub: '692e8d19-sdfg-4bd5ef48b0ab',
-      //     iat: 1sf6,
-      //     exp: 1sf21sf706,
-      //     jti: 'cfaa8f30-dfg316452f0d1'
-      //   token: {
-      //     name: 'Karam',
-      //     email: 'karam//20//@gmail.com',
-      //     picture: 'https://lh3.googleusercontentsdfgmJlQ9nlyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
-      //     sub: '692e8d19sfgd5ef48b0ab',
-      //     iat: 17sdfg706,
-      //   token: {
-      //     name: 'Karam',
-      //     email: 'karam//20//@gmail.com',
-      //     picture: 'https://lh3.googlsfdgt.com/a/.///yaBsmLT-QZFI9V3ebXb_xQ=s96-c',
-      //     email: 'karam.sayed2024@gmail.com',
-      //     picture: 'https://lh3.googleusercontent//lyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
-      //     picture: 'http//smLT-QZFI9V3ebXb_xQ=s96-c',
-      //     sub: '692esfdgd5ef48b0ab',
-      //     iat: 176sdfg706,
-      //     exp: 1770217706,
-      //     jti: 'cfaa8sdfgbe-e4316452f0d1'
-      //   }
-      // }
-      const { session } = sessionnn;
-      const { user } = session;
-      // //1. get the user from database
-      const userFromDB = await User.findOne({ email: user.email });
-      // //2. assign user id from the session
-      user.id = userFromDB._id.toString();
-      //3. return the session
+    // async session(sessionnn, { token }) {
+
+    //this sessionnn is coming from next auth
+    // console.log('this is the session log', sessionnn);
+
+    // this is the session log {
+    //   session: {
+    //     user: {
+    //       name: 'Karam',
+    //       email: 'karam//20//@gmail.com',
+    //       image: 'https://lh3.googleusercontent.com/a/ACg8/////mJlQ9nlyaBsmLT-QZFI///96-c'
+    //     },
+    //     expires: '2026-02-04T15:08:26.468Z'
+    //   },
+    //   token: {
+    //     name: 'Karam',
+    //     email: 'karam//20//@gmail.com',
+    //     picture: 'https://lh3.googleusercontent.com/a/A/////mLT-QZFI9V3ebXb_xQ=s96-c',
+    //     sub: '692e8d19-e5a9-4317-97b3-4bd5ef48b0ab',
+    //     iat: 1767625705,
+    //     exp: 1770217705,
+    //     jti: 'e8e097a0-9713-4cff-be0b-1913fe1187e3'
+    //       email: 'karam//20//@gmail.com',
+    //       image: 'https://lh3.googleusercontent.com/a/ACg8ocKjO////ZFI9V3ebXb_xQ=s96-c'
+    //     },
+    //     expires: '2026-02-04T15:08:26.573Z'
+    //   },
+    //   token: {
+    //     name: 'Karam',
+    //       email: 'karam//20//@gmail.com',
+    //       image: 'https://lh3.googleusercontent.com/a/ACg8o//lyaBsmLT-QZFI9V3ebXb_xQ=s96-c'
+    //     },
+    //     expires: '2026-02-04T15:08:26.573Z'
+    //   },
+    //       email: 'karam//20//@gmail.com',
+    //       image: 'https://lh3.googleuserco//-QZFI9V3ebXb_xQ=s96-c'
+    //       email: 'karam.sayed2024@gmail.com',
+    //       email: 'karam.sayed2024@gmail.com',
+    //   token: {
+    //     name: 'Karam',
+    //     email: 'karam//20//@gmail.com',
+    //     picture: 'https://lh3.googleusercontentsfdgTmJlQ9nlyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
+    //     name: 'Karam',
+    //     email: 'karam//20//@gmail.com',
+    //     picture: 'https://lh3.googleusercosfdgTmJlQ9nlyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
+    //     sub: '692e8d19-sdfg-4bd5ef48b0ab',
+    //     iat: 1sf6,
+    //     exp: 1sf21sf706,
+    //     jti: 'cfaa8f30-dfg316452f0d1'
+    //   token: {
+    //     name: 'Karam',
+    //     email: 'karam//20//@gmail.com',
+    //     picture: 'https://lh3.googleusercontentsdfgmJlQ9nlyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
+    //     sub: '692e8d19sfgd5ef48b0ab',
+    //     iat: 17sdfg706,
+    //   token: {
+    //     name: 'Karam',
+    //     email: 'karam//20//@gmail.com',
+    //     picture: 'https://lh3.googlsfdgt.com/a/.///yaBsmLT-QZFI9V3ebXb_xQ=s96-c',
+    //     email: 'karam.sayed2024@gmail.com',
+    //     picture: 'https://lh3.googleusercontent//lyaBsmLT-QZFI9V3ebXb_xQ=s96-c',
+    //     picture: 'http//smLT-QZFI9V3ebXb_xQ=s96-c',
+    //     sub: '692esfdgd5ef48b0ab',
+    //     iat: 176sdfg706,
+    //     exp: 1770217706,
+    //     jti: 'cfaa8sdfgbe-e4316452f0d1'
+    //   }
+    // }
+    // const { session } = sessionnn;
+    // const { user } = session;
+    // //1. get the user from database
+    // const userFromDB = await User.findOne({ email: user.email });
+    // //2. assign user id from the session
+    // user.id = token.id;
+    //3. return the session
+
+    async session({ session, token }) {
+      session.user.id = token.id;
       return session;
     },
+    //   return session;
+    // },
   },
   secret: process.env.NEXTAUTH_SECRET,
   trustHost: true,
+  debug: true,
 };
 export const { auth, signIn, signOut, handlers } = NextAuth(authOptions);

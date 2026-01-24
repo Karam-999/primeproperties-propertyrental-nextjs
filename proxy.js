@@ -19,7 +19,7 @@ import { NextResponse } from 'next/server';
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
-  console.log('middleware auth', req.auth.user);
+  // console.log('middleware auth', req.auth.user);
 
   // User is NOT logged in
   if (!req.auth?.user) {
