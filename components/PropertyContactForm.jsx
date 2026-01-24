@@ -31,8 +31,12 @@ const PropertyContactForm = ({ property }) => {
   if (!session) {
     return (
       <div className='bg-white p-6 rounded-lg shadow-md'>
-        <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
-        <p className='text-gray-600'>Please sign in to send a message.</p>
+        <h3 className='text-xl font-bold mb-4 text-center'>
+          Contact Property Manager
+        </h3>
+        <p className='text-gray-600 text-center text-red-500'>
+          Please sign in to send a message!!
+        </p>
       </div>
     );
   }

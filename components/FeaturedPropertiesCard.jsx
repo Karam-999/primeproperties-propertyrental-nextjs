@@ -33,35 +33,32 @@ const FeaturedPropertiesCard = ({ property }) => {
           {getRateDisplay()}
         </h3>
         <div className='flex justify-center gap-4 text-gray-500 mb-4'>
-          <p className='text-xs sm:text-xs md:text-base'>
-            <FaBed className='inline mr-1 mb-1 sm:text-xs md:text-lg' />
+          <p className='text-xs  md:text-base'>
+            <FaBed className='inline mr-1 mb-1   md:text-lg' />
             {property.beds}{' '}
-            <span className='inline sm:text-xs lg:text-base'>
+            <span className='inline  lg:text-base'>
               {property.beds > 1 ? 'Beds' : 'Bed'}
             </span>
           </p>
-          <p className='text-xs sm:text-xs md:text-base'>
-            <FaBath className='inline mr-1 mb-1 sm:text-xs md:text-lg' />{' '}
-            {property.baths}{' '}
-            <span className='lg:inline sm:text-xs lg:text-base'>
+          <p className='text-xs  md:text-base'>
+            <FaBath className='inline mr-1 mb-1  md:text-lg' /> {property.baths}{' '}
+            <span className='lg:inline  lg:text-base'>
               {property.baths > 1 ? 'Baths' : 'Bath'}
             </span>
           </p>
-          <p className='text-xs sm:text-xs md:text-base'>
-            <FaRuler className='inline mr-1 mb-1 sm:text-xs md:text-lg' />
+          <p className='text-xs  md:text-base'>
+            <FaRuler className='inline mr-1 mb-1  md:text-lg' />
             {property.square_feet}{' '}
-            <span className='lg:inline sm:text-xs lg:text-base'>sqft</span>
+            <span className='lg:inline  lg:text-base'>sqft</span>
           </p>
         </div>
 
         <div className='flex justify-center gap-4 text-green-900 text-sm mb-4'>
           <p>
-            <FaMoneyBillAlt className='inline mr-1 mb-1 sm:text-xs md:text-lg' />{' '}
-            Weekly
+            <FaMoneyBillAlt className='inline mr-1 mb-1  md:text-lg' /> Weekly
           </p>
           <p>
-            <FaMoneyBillAlt className='inline mr-1 mb-1 sm:text-xs md:text-lg' />{' '}
-            Monthly
+            <FaMoneyBillAlt className='inline mr-1 mb-1  md:text-lg' /> Monthly
           </p>
         </div>
 

@@ -7,7 +7,7 @@ import connectTheDB from '@/config/database';
 import Property from '@/models/Property';
 const PropertyPage = async ({ searchParams }) => {
   await connectTheDB(0);
-  const { page = 1, pageSize = 3 } = await searchParams;
+  const { page = 1, pageSize = 6 } = await searchParams;
   const firstPropertyNoOfNextPage = (page - 1) * pageSize;
   const totalProperties = await Property.countDocuments({});
   console.log('searchParams in property page:', page);
@@ -23,7 +23,7 @@ const PropertyPage = async ({ searchParams }) => {
           {theProperties.leangth === '0' ? (
             <p>No properties Found</p>
           ) : (
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
               {theProperties.map((property) => (
                 <PropertyCard property1={property} key={property._id} />
               ))}
