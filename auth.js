@@ -190,6 +190,6 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   trustHost: true,
-  debug: true,
+  // debug: true,
 };
 export const { auth, signIn, signOut, handlers } = NextAuth(authOptions);

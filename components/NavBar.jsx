@@ -237,6 +237,7 @@ const Navbar = () => {
             <div className='space-y-1 px-2 pb-3 pt-2'>
               <Link
                 href='/'
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`${
                   pathname === '/' ? 'bg-black' : ''
                 } text-white block rounded-md px-3 py-2 text-base font-medium`}>
@@ -244,6 +245,7 @@ const Navbar = () => {
               </Link>
               <Link
                 href='/properties'
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`${
                   pathname === '/properties' ? 'bg-black' : ''
                 } text-white block rounded-md px-3 py-2 text-base font-medium`}>
@@ -252,6 +254,7 @@ const Navbar = () => {
               {sessionn && (
                 <Link
                   href='/properties/add'
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className={`${
                     pathname === '/properties/add' ? 'bg-black' : ''
                   } text-white block rounded-md px-3 py-2 text-base font-medium`}>
